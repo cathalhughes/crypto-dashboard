@@ -127,6 +127,16 @@ button:focus {
   font-weight: bold;
   padding-left: 10px;
 }
+.sentiment {
+  color: $primary;
+  font-size: xx-large;
+  font-weight: bold;
+}
+
+.selector {
+  display: flex;
+}
+
 .content-box {
   height: 100%;
   width: 100%;
@@ -139,6 +149,7 @@ button:focus {
 .menu-bar {
   position: fixed;
   display: flex;
+  justify-content: space-between;
   align-items: center;
   height: 50px;
   width: 100%;

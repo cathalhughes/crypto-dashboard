@@ -15,6 +15,6 @@
     },
     computed: {
       ...mapState('currencies', ['tickers', 'currencies'])
-    }
+    },
   }
 </script>
