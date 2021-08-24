@@ -61,7 +61,7 @@
         >
           {{ ticker.price }}
         </div>
-        <div class="moon-price">
+        <div class="moon-price pr-1">
           {{ info.moonPrice }}
         </div>
       </div>

@@ -19,14 +19,16 @@
       "symbol": "ETHUSDT",
       "base": "ETH",
       "quote": "USDT",
-      "name": "Ethereum"
+      "name": "Ethereum",
+      "moonPrice": 10000
     },
     {
       "cid": 52,
       "symbol": "XRPUSDT",
       "base": "XRP",
       "quote": "USDT",
-      "name": "XRP"
+      "name": "XRP",
+      "moonPrice": 5
     },
     {
       "cid": 1027,
