@@ -1,72 +1,98 @@
 <template>
-    <div class="content-box">
-        <div class="menu-bar">
-            <v-select id="base" :options="currencyList[quote]['pairs']" :clearable="false" v-model="baseCurrency"
-                      placeholder="Select Token"></v-select>
-            <span class="slash">/</span>
-            <v-select id="quote" :options="quoteOptions" :searchable="false" :clearable="false" v-model="quote"
-                      @input="resetBase" style="width: 100px"></v-select>
-            <button class="add-btn" @click="addCoinPair"><i class="fa fa-plus fa-lg" aria-hidden="true"></i></button>
-        </div>
-        <CryptoBoard></CryptoBoard>
-        <button class="clear-btn" @click="clear">Clear All</button>
+  <div class="content-box">
+    <div class="menu-bar">
+      <div class="selector">
+        <v-select
+          id="base"
+          :options="currencyList[quote]['pairs']"
+          :clearable="false"
+          v-model="baseCurrency"
+          placeholder="Select Token"
+          class="pt-2"
+        ></v-select>
+        <span class="slash">/</span>
+        <v-select
+          id="quote"
+          :options="quoteOptions"
+          :searchable="false"
+          :clearable="false"
+          v-model="quote"
+          @input="resetBase"
+          style="width: 100px"
+          class="pt-2"
+        ></v-select>
+        <button class="add-btn" @click="addCoinPair">
+          <i class="fa fa-plus fa-lg" aria-hidden="true"></i>
+        </button>
+      </div>
+      <div class="sentiment-text">
+        <span class="sentiment">Bitcoin Sentiment: {{ bitcoinSentiment }}</span>
+      </div>
     </div>
+    <CryptoBoard></CryptoBoard>
+    <button class="clear-btn" @click="clear">Clear All</button>
+  </div>
 </template>
 <script>
-    import vSelect from 'vue-select'
-    import coins from '@/assets/group.json'
-    import CryptoBoard from './components/crypto-board.vue'
-    import {isEmpty} from '../../../util/Utility'
-    import {subscribeSymbol} from '../../../services/binance'
-    import {mapState} from 'vuex'
+import vSelect from "vue-select";
+import coins from "@/assets/group.json";
+import CryptoBoard from "./components/crypto-board.vue";
+import { isEmpty } from "../../../util/Utility";
+import { subscribeSymbol } from "../../../services/binance";
+import { mapActions, mapState } from "vuex";
 
-    export default {
-        name: 'dashboard',
-        data() {
-            return {
-                currencyList: coins,
-                quote: 'USDT',
-                baseCurrency: {}
-            }
-        },
-        mounted() {
-            if (this.currencies) {
-                this.currencies.forEach(currency => {
-                    subscribeSymbol(currency.symbol);
-                });
-            }
-        },
-        computed: {
-            ...mapState('currencies', ['currencies']),
-            quoteOptions() {
-                return Object.keys(coins)
-            }
-        },
-        components: {
-            vSelect,
-            CryptoBoard
-        },
-        methods: {
-            resetBase() {
-                this.baseCurrency = {}
-            },
-            clear() {
-                localStorage.clear();
-                location.reload();
-            },
-            addCoinPair() {
-                if (!isEmpty(this.baseCurrency)) {
-                    const symbol = `${this.baseCurrency.value}${this.quote}`;
-                    subscribeSymbol(symbol);
-                    this.$store.commit('currencies/ADD_COIN_PAIR', {
-                        "symbol": symbol,
-                        "base": this.baseCurrency.value,
-                        "quote": this.quote,
-                        "name": this.baseCurrency.name,
-                        "cid": this.baseCurrency.cid
-                    })
-                }
-            }
-        }
+export default {
+  name: "dashboard",
+  data() {
+    return {
+      currencyList: coins,
+      quote: "USDT",
+      baseCurrency: {},
+    };
+  },
+  async mounted() {
+    await this.fetchBitcoinSentiment();
+    if (this.currencies) {
+      this.currencies.forEach((currency) => {
+        subscribeSymbol(currency.symbol);
+      });
     }
+  },
+  computed: {
+    ...mapState("currencies", ["currencies"]),
+    ...mapState("sentiment", ["bitcoinSentiment"]),
+
+    quoteOptions() {
+      return Object.keys(coins);
+    },
+  },
+  components: {
+    vSelect,
+    CryptoBoard,
+  },
+  methods: {
+    ...mapActions("sentiment", ["fetchBitcoinSentiment"]),
+
+    resetBase() {
+      this.baseCurrency = {};
+    },
+    clear() {
+      localStorage.clear();
+      location.reload();
+    },
+    addCoinPair() {
+      if (!isEmpty(this.baseCurrency)) {
+        const symbol = `${this.baseCurrency.value}${this.quote}`;
+        subscribeSymbol(symbol);
+        this.$store.commit("currencies/ADD_COIN_PAIR", {
+          symbol: symbol,
+          base: this.baseCurrency.value,
+          quote: this.quote,
+          name: this.baseCurrency.name,
+          cid: this.baseCurrency.cid,
+        });
+      }
+    },
+  },
+};
 </script>
