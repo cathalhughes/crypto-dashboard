@@ -4,7 +4,8 @@
       "symbol": "BTCUSDT",
       "base": "BTC",
       "quote": "USDT",
-      "name": "Bitcoin"
+      "name": "Bitcoin",
+      "moonPrice": 100000
     },
     {
       "cid": 74,
