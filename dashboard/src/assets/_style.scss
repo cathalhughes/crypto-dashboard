@@ -249,6 +249,22 @@ button:focus {
   height: 94px;
 }
 
+.emoji-slider {
+  display: flex;
+  justify-content: space-between;
+  .slider {
+    margin-top: 0.4rem;
+    border-top: 10px dotted black;
+    height: 0.5rem;
+    width: 100%;
+  }
+}
+
+.prices {
+  display: flex;
+  justify-content: space-between;
+}
+
 .box-body{
   display: flex;
   align-items: center;
