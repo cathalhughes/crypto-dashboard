@@ -48,9 +48,7 @@ button:focus {
   left: 0;
   top: 0;
   right: 0;
-  text-align: center;
   height: 50px;
-  line-height: 50px;
   z-index: 100;
   box-shadow: 0 6px 7px 0 rgba(0, 0, 0, 0.45);
   transition: left .3s ease;
@@ -66,9 +64,47 @@ button:focus {
       vertical-align: middle;
     }
   }
+  .prices-btn {
+    background-color: black !important;
+    color: #ffcb1d !important;
+    border: none;
+    cursor: pointer;
+    padding: 0 20px;
+    height: 50px;
+    margin-left: 1rem;
+    font-weight: bold;
+    &:hover {
+      color: black !important;
+      background-color: $primary !important;
+    }
+  }
+  .trades-btn {
+    background-color: black !important;
+    color: #ffcb1d !important;
+    border: none;
+    cursor: pointer;
+    padding: 0 20px;
+    height: 50px;
+    font-weight: bold;
+    &:hover {
+      color: black !important;
+      background-color: $primary !important;
+    }
+  }
   .page-title{
     font-size:25px;
     font-weight: bold;
+    padding-left: 1rem;
+    text-align: left;
+  }
+
+  .hodl {
+    position: absolute;
+    font-size: 25px;
+    font-weight: bold;
+    padding-left: 1rem;
+    text-align: center;
+    left: 45%;
   }
 }
 .page-container {

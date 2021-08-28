@@ -5,6 +5,15 @@
                 <i class="fa fa-angle-left fa-2x"></i>
             </button>
             <span class="page-title">VUE CRYPTO DASHBOARD</span>
+            <button @click="$router.push({ path: '/' })" class="prices-btn">
+                <span>Prices</span>
+            </button>
+            <button @click="$router.push({ path: '/hodl' })" class="trades-btn">
+                <span>HODL</span>
+            </button>
+            <button class="trades-btn">
+                <span>Trades</span>
+            </button>
         </header>
         <div class="page-container">
             <transition name="fade" mode="out-in">

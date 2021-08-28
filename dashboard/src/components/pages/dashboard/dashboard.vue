@@ -22,7 +22,7 @@
           class="pt-2"
         ></v-select>
         <button class="add-btn" @click="addCoinPair">
-          <i class="fa fa-plus fa-lg" aria-hidden="true"></i>
+          <i class="fa fa-plus fa-lg plus-icon" aria-hidden="true"></i>
         </button>
       </div>
       <div class="sentiment-text">
@@ -43,6 +43,8 @@ import { mapActions, mapState } from "vuex";
 
 export default {
   name: "dashboard",
+  props: {
+  },
   data() {
     return {
       currencyList: coins,
@@ -84,7 +86,7 @@ export default {
       if (!isEmpty(this.baseCurrency)) {
         const symbol = `${this.baseCurrency.value}${this.quote}`;
         subscribeSymbol(symbol);
-        this.$store.commit("currencies/ADD_COIN_PAIR", {
+        this.$store.commit('currencies/ADD_COIN_PAIR', {
           symbol: symbol,
           base: this.baseCurrency.value,
           quote: this.quote,

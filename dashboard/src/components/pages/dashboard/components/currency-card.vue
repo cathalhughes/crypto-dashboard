@@ -51,36 +51,48 @@
         </div>
       </div>
     </div>
-    <div v-if="info.moonPrice & ticker.price" class="moon-info">
-      <div class="prices">
-        <div
-          class="current-price"
-          :style="{
-            'margin-left': `${getMoonPercentage(ticker.price, info.moonPrice)}%`,
-          }"
-        >
-          {{ ticker.price }}
+    <slot>
+      <div v-if="info.moonPrice & ticker.price" class="moon-info">
+        <div class="prices">
+          <div
+            class="current-price"
+            :style="{
+              'margin-left': `${getMoonPercentage(
+                ticker.price,
+                info.moonPrice
+              )}%`,
+            }"
+          >
+            {{ ticker.price }}
+          </div>
+          <div class="moon-price pr-1">
+            {{ info.moonPrice }}
+          </div>
         </div>
-        <div class="moon-price pr-1">
-          {{ info.moonPrice }}
-        </div>
-      </div>
 
-      <div class="emoji-slider">
-        <div
-          :style="{
-            'margin-left': `${getMoonPercentage(ticker.price, info.moonPrice)}%`,
-          }"
-        >
-          🚀
+        <div class="emoji-slider">
+          <div
+            :style="{
+              'margin-left': `${getMoonPercentage(
+                ticker.price,
+                info.moonPrice
+              )}%`,
+            }"
+          >
+            🚀
+          </div>
+          <div class="slider" />
+          <div class="pl-1">🌕</div>
         </div>
-        <div class="slider" />
-        <div class="pl-1">🌕</div>
       </div>
-    </div>
-    <div class="sparkline-chart" v-if="ticker.price">
-      <Sparkline :cdata="ticker.price" :width="380" :height="info.moonPrice ? 50 : 90"></Sparkline>
-    </div>
+      <div class="sparkline-chart" v-if="ticker.price">
+        <Sparkline
+          :cdata="ticker.price"
+          :width="380"
+          :height="info.moonPrice ? 50 : 90"
+        ></Sparkline>
+      </div>
+    </slot>
   </div>
 </template>
 <script>
@@ -110,10 +122,6 @@ export default {
     },
     openDetails() {
       this.showDropDown = false;
-      this.$router.push({
-        name: "infoview",
-        params: { symbol: this.info.symbol },
-      });
     },
     closeDropDown() {
       this.showDropDown = false;
