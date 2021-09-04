@@ -15,6 +15,11 @@ const router = new Router({
     //   component: () => import('./views/InfoView.vue'),
     //   props: true
     // }
+    {
+      path: '/hodl',
+      name: 'hodlview',
+      component: () => import('./components/pages/hodl/hodl-dashboard.vue'),
+    }
   ]
 })
 router.beforeEach((to, from, next) => {
