@@ -19,6 +19,11 @@ const router = new Router({
       path: '/hodl',
       name: 'hodlview',
       component: () => import('./components/pages/hodl/hodl-dashboard.vue'),
+    },
+    {
+      path: '/trades',
+      name: 'tradeview',
+      component: () => import('./components/pages/trades/trades-dashboard.vue'),
     }
   ]
 })

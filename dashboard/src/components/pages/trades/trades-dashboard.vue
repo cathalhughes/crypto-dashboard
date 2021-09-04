@@ -1,36 +1,36 @@
 <template>
   <div class="content-box">
     <selector @change="addCoinPair" />
-    <HodlBoard />
+    <trades-board />
     <button class="clear-btn" @click="clear">Clear All</button>
   </div>
 </template>
 <script>
-import HodlBoard from "../hodl/components/hodl-board.vue";
 import { isEmpty } from "../../../util/Utility";
 import { subscribeSymbol } from "../../../services/binance";
 import { mapState } from "vuex";
 import Selector from "../../common-components/selector.vue";
+import TradesBoard from './components/trades-board.vue';
 
 export default {
-  name: "HodlDashboard",
+  name: "TradesDashboard",
   async mounted() {
-    if (this.hodlCurrencies) {
-      this.hodlCurrencies.forEach((currency) => {
+    if (this.trades) {
+      this.trades.forEach((currency) => {
         subscribeSymbol(currency.symbol);
       });
     }
   },
   computed: {
-    ...mapState("hodl", ["hodlCurrencies"]),
+    ...mapState("trades", ["trades"]),
   },
   components: {
-    HodlBoard,
     Selector,
+    TradesBoard,
   },
   methods: {
     clear() {
-      localStorage.clear();
+      localStorage.removeItem('vue-crypto-trades-new');
       location.reload();
     },
     addCoinPair(event) {
@@ -38,7 +38,7 @@ export default {
       if (!isEmpty(baseCurrency)) {
         const symbol = `${baseCurrency.value}${quote}`;
         subscribeSymbol(symbol);
-        this.$store.commit("hodl/ADD_COIN_PAIR", {
+        this.$store.commit("trades/ADD_COIN_PAIR", {
           symbol: symbol,
           base: baseCurrency.value,
           quote: quote,

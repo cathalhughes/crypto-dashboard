@@ -1,45 +1,17 @@
 <template>
   <div class="content-box">
-    <div class="menu-bar">
-      <div class="selector">
-        <v-select
-          id="base"
-          :options="currencyList[quote]['pairs']"
-          :clearable="false"
-          v-model="baseCurrency"
-          placeholder="Select Token"
-          class="pt-2"
-        ></v-select>
-        <span class="slash">/</span>
-        <v-select
-          id="quote"
-          :options="quoteOptions"
-          :searchable="false"
-          :clearable="false"
-          v-model="quote"
-          @input="resetBase"
-          style="width: 100px"
-          class="pt-2"
-        ></v-select>
-        <button class="add-btn" @click="addCoinPair">
-          <i class="fa fa-plus fa-lg plus-icon" aria-hidden="true"></i>
-        </button>
-      </div>
-      <div class="sentiment-text">
-        <span class="sentiment">Bitcoin Sentiment: {{ bitcoinSentiment }}</span>
-      </div>
-    </div>
+    <selector @change="addCoinPair" />
     <CryptoBoard></CryptoBoard>
     <button class="clear-btn" @click="clear">Clear All</button>
   </div>
 </template>
 <script>
-import vSelect from "vue-select";
 import coins from "@/assets/group.json";
 import CryptoBoard from "./components/crypto-board.vue";
 import { isEmpty } from "../../../util/Utility";
 import { subscribeSymbol } from "../../../services/binance";
 import { mapActions, mapState } from "vuex";
+import Selector from '../../common-components/selector.vue';
 
 export default {
   name: "dashboard",
@@ -69,8 +41,8 @@ export default {
     },
   },
   components: {
-    vSelect,
     CryptoBoard,
+    Selector,
   },
   methods: {
     ...mapActions("sentiment", ["fetchBitcoinSentiment"]),
@@ -82,16 +54,18 @@ export default {
       localStorage.clear();
       location.reload();
     },
-    addCoinPair() {
-      if (!isEmpty(this.baseCurrency)) {
-        const symbol = `${this.baseCurrency.value}${this.quote}`;
+    addCoinPair(event) {
+      console.log(event);
+      const { baseCurrency, quote } = event;
+      if (!isEmpty(baseCurrency)) {
+        const symbol = `${baseCurrency.value}${quote}`;
         subscribeSymbol(symbol);
         this.$store.commit('currencies/ADD_COIN_PAIR', {
           symbol: symbol,
-          base: this.baseCurrency.value,
-          quote: this.quote,
-          name: this.baseCurrency.name,
-          cid: this.baseCurrency.cid,
+          base: baseCurrency.value,
+          quote: quote,
+          name: baseCurrency.name,
+          cid: baseCurrency.cid,
         });
       }
     },
