@@ -12,7 +12,6 @@ const store = {
   getters: {},
   mutations: {
     ADD_COIN_PAIR: (state, payload) => {
-      console.log(payload, "state", "sure");
       const index = state.hodlCurrencies.findIndex(
         (s) => s.symbol === payload.symbol
       );

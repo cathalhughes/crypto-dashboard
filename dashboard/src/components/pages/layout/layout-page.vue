@@ -11,7 +11,7 @@
             <button @click="$router.push({ path: '/hodl' })" class="trades-btn">
                 <span>HODL</span>
             </button>
-            <button class="trades-btn">
+            <button @click="$router.push({ path: '/trades' })" class="trades-btn">
                 <span>Trades</span>
             </button>
         </header>
