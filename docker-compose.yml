@@ -1,0 +1,24 @@
+version: '3'
+services:
+  # nodejs-server:
+  #   build:
+  #     context: ./api
+  #     dockerfile: Dockerfile-dev
+  #   ports:
+  #     - "3080:3080"
+  #   container_name: node-api
+  #   volumes:
+  #      - ./api:/usr/src/app/api
+  #      - /usr/src/app/api/node_modules
+  crypto-dashboard-ui:
+    build:
+      context: ./dashboard
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    container_name: crypto-dashboard-ui
+    volumes:
+       - ./dashboard:/usr/src/app/dashboard
+       - /usr/src/app/dashboard/node_modules
+    environment: 
+      - CHOKIDAR_USEPOLLING=true # <---- this enables the hot reloading

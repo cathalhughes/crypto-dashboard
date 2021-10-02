@@ -1,32 +1,32 @@
-import Api from './api'
-import store from '../store'
+import Api from './api';
+import store from '../store';
 
 const wsApi = new Api();
 
 const subscribeSymbol = function(symbol) {
-  wsApi.onTicker(symbol,(ticker) => {
-    const tick = {
-      price: parseFloat(ticker.c),
-      vol: parseFloat(ticker.q).toFixed(2),
-      percent: parseFloat(ticker.P).toFixed(2),
-      chg: ticker.p,
-      high: ticker.h,
-      low: ticker.l,
-      open: ticker.o,
-      time:ticker.E,
-      symbol: symbol
-    };
-    store.commit('currencies/UPDATE_TICKER', tick)
-  })
+    wsApi.onTicker(symbol, ticker => {
+        const tick = {
+            price: parseFloat(ticker.c),
+            vol: parseFloat(ticker.q).toFixed(2),
+            percent: parseFloat(ticker.P).toFixed(2),
+            chg: ticker.p,
+            high: ticker.h,
+            low: ticker.l,
+            open: ticker.o,
+            time: ticker.E,
+            symbol,
+        };
+        store.commit('currencies/UPDATE_TICKER', tick);
+    });
 };
 const unSubscribeSymbol = function(symbol) {
-  wsApi.closeSubscription('ticker',false, symbol)
+    wsApi.closeSubscription('ticker', false, symbol);
 };
 
 const subscribeChart = function(symbol, interval) {
-  wsApi.onKline(symbol, interval, () => {})
+    wsApi.onKline(symbol, interval, () => {});
 };
 const unSubscribeChart = function(symbol, interval) {
-  wsApi.closeSubscription('kline',false, symbol, interval)
-}
-export {subscribeSymbol, unSubscribeSymbol, subscribeChart, unSubscribeChart}
+    wsApi.closeSubscription('kline', false, symbol, interval);
+};
+export { subscribeSymbol, unSubscribeSymbol, subscribeChart, unSubscribeChart };

@@ -1,0 +1,6 @@
+bundle*.js
+vendor*.js
+scripts/outputs/*
+/lk-templates
+/wwwroot
+/docs
