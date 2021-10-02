@@ -3,11 +3,13 @@
         <layout-page />
     </div>
 </template>
+
 <script>
-  import LayoutPage from './components/pages/layout/layout-page.vue'
-  export default {
+import LayoutPage from './components/pages/layout/layout-page.vue';
+
+export default {
     components: {
-      'layout-page': LayoutPage
-    }
-  }
+        'layout-page': LayoutPage,
+    },
+};
 </script>

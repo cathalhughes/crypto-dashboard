@@ -1,20 +1,22 @@
 <template>
-  <div class="board">
-    <div class="card-block" v-for="value in currencies" :key="value.symbol">
-      <CurrencyCard :ticker="tickers[value.symbol] || {}" :info="value"></CurrencyCard>
+    <div class="board">
+        <div v-for="value in currencies" :key="value.symbol" class="card-block">
+            <CurrencyCard :ticker="tickers[value.symbol] || {}" :info="value" />
+        </div>
     </div>
-  </div>
 </template>
+
 <script>
-  import CurrencyCard from './currency-card.vue'
-  import { mapState } from 'vuex'
-  export default {
+import { mapState } from 'vuex';
+import CurrencyCard from './currency-card.vue';
+
+export default {
     name: 'CryptoBoard',
     components: {
-      CurrencyCard
+        CurrencyCard,
     },
     computed: {
-      ...mapState('currencies', ['tickers', 'currencies'])
+        ...mapState('currencies', ['tickers', 'currencies']),
     },
-  }
+};
 </script>
