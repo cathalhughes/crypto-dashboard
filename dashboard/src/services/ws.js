@@ -32,7 +32,9 @@ export default function(url, opts) {
 
     self.open = () => {
         ws = new WebSocket(url, opts.protocols);
-        for (k in $) {ws[k] = $[k];}
+        for (k in $) {
+            ws[k] = $[k];
+        }
     };
 
     self.reconnect = e => {
