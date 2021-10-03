@@ -7,7 +7,7 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "docs": "vue-cli-service build --dest docs",
-    "autoformat": "npm run eslint:fix && npm run prettier:fix",
+    "autoformat": "npm run prettier:fix",
     "eslint:fix": "eslint --ext js,vue --fix .",
     "prettier": "prettier --list-different \"**/*.{js,vue}\"",
     "prettier:fix": "prettier --list-different --write \"**/*.{js,vue}\" ; echo \"All files listed above, if any, have been automatically formatted by Prettier.\""
