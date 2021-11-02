@@ -94,7 +94,7 @@ export default {
     components: {
         Sparkline,
     },
-    props: ['ticker', 'info'],
+    props: ['ticker', 'info', 'vuexModule'],
     data() {
         return {
             showDropDown: false,
@@ -110,9 +110,10 @@ export default {
             this.showDropDown = true;
         },
         removeCard() {
+            console.log(this.vuexModule, 'in here')
             this.showDropDown = false;
             unSubscribeSymbol(this.info.symbol);
-            this.$store.commit('currencies/REMOVE_COIN_PAIR', this.info.symbol);
+            this.$store.commit(`${this.vuexModule || 'currencies'}/REMOVE_COIN_PAIR`, this.info.symbol);
         },
         openDetails() {
             this.showDropDown = false;

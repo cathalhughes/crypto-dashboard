@@ -1,7 +1,7 @@
 <template>
     <div class="board">
         <div v-for="value in hodlCurrencies" :key="value.symbol" class="card-block">
-            <CurrencyCard :ticker="tickers[value.symbol] || {}" :info="value">
+            <CurrencyCard :ticker="tickers[value.symbol] || {}" :info="value" vuex-module="hodl">
                 <hodl-details
                     :ticker="tickers[value.symbol] || {}"
                     :amount-owned="value.amountOwned"

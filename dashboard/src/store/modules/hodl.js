@@ -19,6 +19,7 @@ const store = {
             }
         },
         REMOVE_COIN_PAIR: (state, symbol) => {
+            console.log('in here')
             state.hodlCurrencies.splice(
                 state.hodlCurrencies.findIndex(s => s.symbol === symbol),
                 1
