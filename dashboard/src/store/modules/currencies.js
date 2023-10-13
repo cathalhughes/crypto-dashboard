@@ -12,15 +12,15 @@ const store = {
         chartData: [],
     },
     getters: {
-        getSymbolById: state => symbol => {
-            return state.currencies.find(s => s.symbol === symbol);
+        getSymbolById: (state) => (symbol) => {
+            return state.currencies.find((s) => s.symbol === symbol);
         },
-        getTickerById: state => symbol => {
+        getTickerById: (state) => (symbol) => {
             return state.tickers[symbol];
         },
     },
     mutations: {
-        SET_DEFAULT: state => {
+        SET_DEFAULT: (state) => {
             state.currencies = defaultPair;
         },
         UPDATE_TICKER: (state, payload) => {
@@ -37,7 +37,10 @@ const store = {
         },
         REMOVE_COIN_PAIR: (state, symbol) => {
             Vue.delete(state.tickers, symbol);
-            state.currencies.splice(state.currencies.findIndex(s => s.symbol === symbol), 1);
+            state.currencies.splice(
+                state.currencies.findIndex((s) => s.symbol === symbol),
+                1
+            );
             localStorage.setItem('vue-crypto-currencies-new', JSON.stringify(state.currencies));
         },
     },

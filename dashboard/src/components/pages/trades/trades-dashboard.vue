@@ -17,7 +17,7 @@ export default {
     name: 'TradesDashboard',
     async mounted() {
         if (this.trades) {
-            this.trades.forEach(currency => {
+            this.trades.forEach((currency) => {
                 subscribeSymbol(currency.symbol);
             });
         }

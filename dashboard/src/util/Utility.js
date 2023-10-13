@@ -1,4 +1,4 @@
-const isEmpty = function(obj) {
+const isEmpty = function (obj) {
     for (const key in obj) {
         if (Object.prototype.hasOwnProperty.call(obj, key)) {
             return false;
@@ -6,7 +6,7 @@ const isEmpty = function(obj) {
     }
     return true;
 };
-const ago = function(val) {
+const ago = function (val) {
     val = 0 | ((Date.now() - new Date(val * 1000)) / 1000);
     let unit;
     const length = { sec: 60, min: 60, hr: 24, day: 7, week: 4.35, month: 12, year: 10000 };

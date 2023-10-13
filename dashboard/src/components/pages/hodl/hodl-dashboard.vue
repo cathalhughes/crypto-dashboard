@@ -17,7 +17,7 @@ export default {
     name: 'HodlDashboard',
     async mounted() {
         if (this.hodlCurrencies) {
-            this.hodlCurrencies.forEach(currency => {
+            this.hodlCurrencies.forEach((currency) => {
                 subscribeSymbol(currency.symbol);
             });
         }

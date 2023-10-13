@@ -39,7 +39,8 @@ import vSelect from 'vue-select';
 import coins from '@/assets/group.json';
 
 export default {
-    name: 'Selector',
+    // eslint-disable-next-line
+    name: 'selector',
     data() {
         return {
             currencyList: coins,
@@ -80,7 +81,7 @@ export default {
         },
     },
     async created() {
-        await this.fetchBitcoinSentiment();
+        // await this.fetchBitcoinSentiment();
     },
     components: {
         vSelect,

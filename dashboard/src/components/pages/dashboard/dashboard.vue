@@ -15,7 +15,8 @@ import { subscribeSymbol } from '../../../services/binance';
 import Selector from '../../common-components/selector.vue';
 
 export default {
-    name: 'Dashboard',
+    // eslint-disable-next-line
+    name: 'dashboard',
     props: {},
     data() {
         return {
@@ -25,9 +26,9 @@ export default {
         };
     },
     async mounted() {
-        await this.fetchBitcoinSentiment();
+        // await this.fetchBitcoinSentiment();
         if (this.currencies) {
-            this.currencies.forEach(currency => {
+            this.currencies.forEach((currency) => {
                 subscribeSymbol(currency.symbol);
             });
         }

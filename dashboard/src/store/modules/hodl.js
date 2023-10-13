@@ -12,23 +12,23 @@ const store = {
     getters: {},
     mutations: {
         ADD_COIN_PAIR: (state, payload) => {
-            const index = state.hodlCurrencies.findIndex(s => s.symbol === payload.symbol);
+            const index = state.hodlCurrencies.findIndex((s) => s.symbol === payload.symbol);
             if (index === -1) {
                 state.hodlCurrencies.push(payload);
                 localStorage.setItem('vue-crypto-hodls-new', JSON.stringify(state.hodlCurrencies));
             }
         },
         REMOVE_COIN_PAIR: (state, symbol) => {
-            console.log('in here')
+            console.log('in here');
             state.hodlCurrencies.splice(
-                state.hodlCurrencies.findIndex(s => s.symbol === symbol),
+                state.hodlCurrencies.findIndex((s) => s.symbol === symbol),
                 1
             );
             localStorage.setItem('vue-crypto-hodls-new', JSON.stringify(state.hodlCurrencies));
         },
 
         updateAmountOwned(state, { value, symbol }) {
-            const index = state.hodlCurrencies.findIndex(s => s.symbol === symbol);
+            const index = state.hodlCurrencies.findIndex((s) => s.symbol === symbol);
             const obj = cloneDeep(state.hodlCurrencies[index]);
             obj.amountOwned = value;
             Vue.set(state.hodlCurrencies, index, obj);

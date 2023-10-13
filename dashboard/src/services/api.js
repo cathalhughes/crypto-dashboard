@@ -8,13 +8,13 @@ export default class Api {
         this._combinedBaseUrl = 'wss://stream.binance.com:9443/stream?streams=';
         this.subscription = {};
         this.streams = {
-            depth: symbol => `${symbol.toLowerCase()}@depth`,
+            depth: (symbol) => `${symbol.toLowerCase()}@depth`,
             depthLevel: (symbol, level) => `${symbol.toLowerCase()}@depth${level}`,
             kline: (symbol, interval) => `${symbol.toLowerCase()}@kline_${interval}`,
-            aggTrade: symbol => `${symbol.toLowerCase()}@aggTrade`,
-            trade: symbol => `${symbol.toLowerCase()}@trade`,
-            ticker: symbol => `${symbol.toLowerCase()}@ticker`,
-            miniTicker: symbol => `${symbol.toLowerCase()}@miniTicker`,
+            aggTrade: (symbol) => `${symbol.toLowerCase()}@aggTrade`,
+            trade: (symbol) => `${symbol.toLowerCase()}@trade`,
+            ticker: (symbol) => `${symbol.toLowerCase()}@ticker`,
+            miniTicker: (symbol) => `${symbol.toLowerCase()}@miniTicker`,
             allMiniTicker: () => `!miniTicker@arr`,
             allTickers: () => '!ticker@arr',
         };
@@ -30,15 +30,15 @@ export default class Api {
             ws = new WS(path, {
                 timeout: this.timeout,
                 maxAttempts: this.maxAttempts,
-                onopen: e => console.log('Connected!', e),
-                onmessage: e => cb(JSON.parse(e.data)),
-                onreconnect: e => console.log('Reconnecting...', e),
-                onmaximum: e => console.log('Stop Attempting!', e),
-                onclose: e => {
+                onopen: (e) => console.log('Connected!', e),
+                onmessage: (e) => cb(JSON.parse(e.data)),
+                onreconnect: (e) => console.log('Reconnecting...', e),
+                onmaximum: (e) => console.log('Stop Attempting!', e),
+                onclose: (e) => {
                     console.log('Closed!', e);
                     this.removeSubscription(e.endpoint);
                 },
-                onerror: e => console.log('Error:', e),
+                onerror: (e) => console.log('Error:', e),
             });
             this.subscription[path] = ws;
         } catch (ex) {

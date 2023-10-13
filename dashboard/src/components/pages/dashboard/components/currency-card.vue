@@ -15,7 +15,7 @@
                         <div v-if="ticker.price" class="coin-price">
                             {{ ticker.price || ''
                             }}<span
-                                style="font-size: x-small; font-weight: 700; padding-left: 3px;"
+                                style="font-size: x-small; font-weight: 700; padding-left: 3px"
                                 >{{ info.quote }}</span
                             >
                         </div>
@@ -110,10 +110,13 @@ export default {
             this.showDropDown = true;
         },
         removeCard() {
-            console.log(this.vuexModule, 'in here')
+            console.log(this.vuexModule, 'in here');
             this.showDropDown = false;
             unSubscribeSymbol(this.info.symbol);
-            this.$store.commit(`${this.vuexModule || 'currencies'}/REMOVE_COIN_PAIR`, this.info.symbol);
+            this.$store.commit(
+                `${this.vuexModule || 'currencies'}/REMOVE_COIN_PAIR`,
+                this.info.symbol
+            );
         },
         openDetails() {
             this.showDropDown = false;

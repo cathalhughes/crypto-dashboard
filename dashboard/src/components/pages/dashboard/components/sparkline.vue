@@ -32,7 +32,7 @@
                     :cx="pt[pt.length - 1].x - 2"
                     :cy="pt[pt.length - 1].y"
                     :r="3"
-                    style="fill:red"
+                    style="fill: red"
                 />
             </g>
         </svg>
@@ -41,6 +41,8 @@
 
 <script>
 export default {
+    // eslint-disable-next-line
+    name: 'sparkline',
     props: {
         width: {
             type: Number,
@@ -80,7 +82,7 @@ export default {
     },
     computed: {
         linePoints() {
-            return this.pt.map(p => this.curve(p)).reduce((a, b) => a.concat(b));
+            return this.pt.map((p) => this.curve(p)).reduce((a, b) => a.concat(b));
         },
         fillPoints() {
             return this.linePoints.concat([

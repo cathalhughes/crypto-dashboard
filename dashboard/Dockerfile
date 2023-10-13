@@ -1,22 +1,29 @@
-FROM node:lts-alpine
+# Use an official Node.js image as your base image
+FROM node:16-alpine
 
-# install simple http server for serving static content
+# Install Python and other build dependencies
+RUN apk add --no-cache python3 make g++
+
+# Install simple http server for serving static content
 RUN npm install -g http-server
 
-# make the 'app' folder the current working directory
+# Set the working directory to /app
 WORKDIR /app
 
-# copy both 'package.json' and 'package-lock.json' (if available)
+# Copy package.json and package-lock.json to the container
 COPY package*.json ./
 
-# install project dependencies
+# Install project dependencies
 RUN npm install
 
-# copy project files and folders to the current working directory (i.e. 'app' folder)
+# Copy project files and folders to the container
 COPY . .
 
-# build app for production with minification
+# Build the app for production with minification
 RUN npm run build
 
+# Expose the port your application will listen on
 EXPOSE 8080
-CMD [ "http-server", "dist" ]
+
+# Start your application
+CMD ["http-server", "dist"]

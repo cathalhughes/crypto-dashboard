@@ -3,8 +3,8 @@ import store from '../store';
 
 const wsApi = new Api();
 
-const subscribeSymbol = function(symbol) {
-    wsApi.onTicker(symbol, ticker => {
+const subscribeSymbol = function (symbol) {
+    wsApi.onTicker(symbol, (ticker) => {
         const tick = {
             price: parseFloat(ticker.c),
             vol: parseFloat(ticker.q).toFixed(2),
@@ -19,14 +19,14 @@ const subscribeSymbol = function(symbol) {
         store.commit('currencies/UPDATE_TICKER', tick);
     });
 };
-const unSubscribeSymbol = function(symbol) {
+const unSubscribeSymbol = function (symbol) {
     wsApi.closeSubscription('ticker', false, symbol);
 };
 
-const subscribeChart = function(symbol, interval) {
+const subscribeChart = function (symbol, interval) {
     wsApi.onKline(symbol, interval, () => {});
 };
-const unSubscribeChart = function(symbol, interval) {
+const unSubscribeChart = function (symbol, interval) {
     wsApi.closeSubscription('kline', false, symbol, interval);
 };
 export { subscribeSymbol, unSubscribeSymbol, subscribeChart, unSubscribeChart };

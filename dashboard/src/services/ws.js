@@ -1,6 +1,6 @@
 function noop() {}
 // Websocket Wrapper API with reconnection option
-export default function(url, opts) {
+export default function (url, opts) {
     opts = opts || {};
 
     let k;
@@ -13,18 +13,18 @@ export default function(url, opts) {
 
     $.onmessage = opts.onmessage || noop;
 
-    $.onclose = e => {
+    $.onclose = (e) => {
         e.endpoint = url;
         e.code !== 1e3 && e.code !== 1005 && self.reconnect(e);
         (opts.onclose || noop)(e);
     };
 
-    $.onerror = e => {
+    $.onerror = (e) => {
         e.endpoint = url;
         e && e.code === 'ECONNREFUSED' ? self.reconnect(e) : (opts.onerror || noop)(e);
     };
 
-    $.onopen = e => {
+    $.onopen = (e) => {
         e.endpoint = url;
         num = 0;
         (opts.onopen || noop)(e);
@@ -37,7 +37,7 @@ export default function(url, opts) {
         }
     };
 
-    self.reconnect = e => {
+    self.reconnect = (e) => {
         num++ < max
             ? setTimeout(() => {
                   (opts.onreconnect || noop)(e);
